@@ -1,0 +1,10 @@
+contexto,respuesta
+"Sistema de Información","Es un conjunto de elementos orientados al tratamiento y administración de datos e información, organizados y listos para su posterior uso, generados para cubrir una necesidad (objetivo)."
+"Sistema de Gestión de seguridad publica","Plataforma de gestión, sistematización e interoperabilidad de servicios de información de seguridad pública"
+"SGSP","Sistema de Gestión de seguridad publica"
+"¿Qué es el SGSP?","El Sistema de Gestión de Seguridad Pública (SGSP) es una plataforma de gestión, sistematización e interoperabilidad de servicios de información de seguridad pública, que permite la integración y análisis de información para la toma de decisiones en materia de seguridad pública."
+"¿Qué Roles admite el SGSP?","El SGSP admite los siguientes roles: Víctima, Denunciante, Indagado, Conductor."
+"¿Cómo se clasifican los Eventos","Los eventos se clasifican en: Delito o Falta, Hecho Policial o Accidente"
+"Delito o Falta","Los eventos deben se clasificados como 'Delito o Falta' cuando su contenido describa una acción u omisión contra la ley penal."
+"Hecho Policial","Los eventos deben ser clasificados como 'Hecho Policial' cuando su contenido NO describa una acción u omisión contra la ley penal, pero la Policía tomó conocimiento y/o participó y/o intervino."
+"Accidente","Los eventos deben ser clasificados como “Accidente” cuando refiere a un hecho fortuito o acción no deseada que por negligencias propias o de terceros o por factores externos, se llega a un fin no deseado"

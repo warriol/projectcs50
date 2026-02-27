@@ -39,9 +39,20 @@ function appendMessage(type, text) {
     const html = `
         <div class="d-flex flex-column mb-3 ${alignment}">
             <div class="p-3 rounded-3 shadow-sm chat-bubble ${type}">
-                ${text}
+                ${marked.parse(text)}
                 <div class="text-end small opacity-50 mt-1" style="font-size: 0.7rem;">${time}</div>
             </div>
         </div>`;
     chatWindow.insertAdjacentHTML('beforeend', html);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const bubbles = document.querySelectorAll('.chat-bubble');
+    bubbles.forEach(bubble => {
+        // Obtenemos el texto crudo, lo pasamos por marked y lo reinsertamos
+        const rawText = bubble.innerHTML.trim();
+        bubble.innerHTML = marked.parse(rawText);
+    });
+    // Hacer scroll al final al cargar
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+});
