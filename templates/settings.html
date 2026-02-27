@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}Ajustes{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mb-4">Configuración de Usuario</h2>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Seguridad</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/change_password" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña Actual</label>
+                            <input class="form-control" name="current_password" type="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nueva Contraseña</label>
+                            <input class="form-control" name="new_password" type="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirmar Nueva Contraseña</label>
+                            <input class="form-control" name="confirmation" type="password" required>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Actualizar Contraseña</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-white text-danger">
+                    <h5 class="mb-0">Zona de Peligro</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Una vez que elimines tu historial de chat, no podrá ser recuperado.</p>
+                    <form action="/clear_history" method="post" onsubmit="return confirm('¿Estás seguro de que deseas borrar todo el historial de chat?');">
+                        <button class="btn btn-outline-danger" type="submit">Borrar Historial de Chat</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

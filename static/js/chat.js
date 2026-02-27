@@ -56,3 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hacer scroll al final al cargar
     chatWindow.scrollTop = chatWindow.scrollHeight;
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const alerts = document.getElementById("mensajes");
+
+    setTimeout(function() {
+        alerts.classList.add('fade');
+        alerts.style.display = 'none';
+    }, 5000);
+
+});
