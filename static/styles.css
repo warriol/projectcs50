@@ -1,0 +1,9 @@
+body {
+    font-family: 'Inter', sans-serif;
+    padding-top: 70px; /* Espacio para la navbar fija */
+    background-color: #f8f9fa;
+}
+.navbar-brand img {
+    height: 30px;
+    margin-right: 10px;
+}

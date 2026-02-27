@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Bienvenido
+{% endblock %}
+
+{% block main %}
+
+    <div class="row align-items-center">
+        <div class="col-md-7 text-start">
+            <h1 class="display-4 fw-bold">Asistente de Legal-IT</h1>
+            <p class="lead text-muted">Optimización de consultas normativas y corrección técnica para el Ministerio del Interior.</p>
+            <div class="mt-4">
+                <a href="/login" class="btn btn-primary btn-lg px-4 me-md-2">Iniciar Sesión</a>
+                <a href="/register" class="btn btn-outline-secondary btn-lg px-4">Registrarse</a>
+            </div>
+        </div>
+        <div class="col-md-5 text-center">
+            <img src="/static/logo_asistente.png" class="img-fluid rounded shadow" alt="Asistente IA">
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row bg-light p-4 rounded-3 border">
+        <div class="col-12 text-center">
+            <p class="text-muted mb-3">Este sistema ha sido desarrollado como <strong>Proyecto Final</strong> para el curso:</p>
+            <div class="d-flex justify-content-center align-items-center gap-4">
+                <a href="https://cs50.harvard.edu/x/2026/" target="_blank">
+                    <img src="/static/cs50.jpg" alt="Logo CS50" style="height: 60px;">
+                </a>
+                <a href="https://edx.org" target="_blank">
+                    <img src="/static/edx-logo-elm.svg" alt="Logo edX" style="height: 30px;">
+                </a>
+            </div>
+            <p class="mt-3 small">
+                <a href="https://cs50.harvard.edu/x/" class="text-decoration-none text-danger fw-bold" target="_blank">
+                    CS50x: Introduction to Computer Science - Harvard University
+                </a>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
