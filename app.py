@@ -3,6 +3,14 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from models import db, User, Message
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+# Cargar variables desde el archivo .env
+load_dotenv()
+
+# Configurar Gemini
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = Flask(__name__)
 
@@ -42,7 +50,7 @@ def register():
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
 
-        # 1. Validaciones básicas
+        # 1. Validaciones
         if not username or not password or not confirmation:
             flash("Todos los campos son obligatorios")
             return redirect("/register")
@@ -115,7 +123,6 @@ def logout():
 
 @app.route("/dashboard")
 def dashboard():
-    # Solo accesible si hay sesión
     if not session.get("user_id"):
         return redirect("/login")
     

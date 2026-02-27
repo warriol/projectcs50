@@ -32,6 +32,17 @@ pip install flask-sqlalchemy
 ## Liberia de Google
 pip install -U google-generativeai
 
+## Librería para leer archivo .env
+pip install python-dotenv
+
 # Guardar dependencias en caso de nuevas instalaciones
 pip freeze > requirements.txt
+```
+
+### API KEY de Gemini
+#### En este caso usare Gemini como Agente de IA, para poder usarlo es necesario obtener una API Key, para ello debemos de solicitar una de forma gratuita en: https://aistudio.google.com/
+#### Una vez obtenida hay que pegar dicha clave en el archivo .env, junto a la clave correspondiente
+```bash
+# reemplaza "tu_llave_aqui_sin_comillas" por la clave obtenida
+GEMINI_API_KEY=tu_llave_aqui_sin_comillas
 ```
