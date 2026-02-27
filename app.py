@@ -36,6 +36,7 @@ with app.app_context():
 basedir = os.path.abspath(os.path.dirname(__file__))
 ruta_csv = os.path.join(basedir, 'data', 'train.csv')
 
+
 def cargar_contexto_csv(ruta_csv):
     if not os.path.exists(ruta_csv):
         print(f"CRÍTICO: El archivo {ruta_csv} no existe.")
@@ -56,6 +57,7 @@ def cargar_contexto_csv(ruta_csv):
         print(f"Error cargando CSV: {e}")
         return ""
     
+
 base_conocimiento = cargar_contexto_csv(ruta_csv)
 
 PROMPTS = {
@@ -63,6 +65,7 @@ PROMPTS = {
     "corrector": "Eres un profesor de lengua española con excelente ortografía y gramática, tienes como tareas: Revisarás el texto que se te envíe y harás las correcciones necesarias. Verifica que al comienzo de cada párrafo haya una sangría de 5 espacios. Entre un párrafo y el siguiente, debe haber un interlineado. Si hay texto entre comillas indica que es un pasaje textual, se espera que no hagas correcciones orográficas o gramaticales de los pasajes textuales, pero si el mismo esta escrito en minúsculas debes cambiar el texto del pasaje textual a mayúsculas. Presentarás como respuesta el texto corregido y al final una lista con las correcciones que hayas realizado",
     "manual": f"""Eres un asistente técnico experto del Ministerio del Interior. Tu única fuente de verdad es la siguiente base de conocimientos: {base_conocimiento} INSTRUCCIONES CRÍTICAS: 1. Analiza la pregunta del usuario y busca conceptos relacionados en la columna 'Situación'. 2. Si la pregunta es similar o trata sobre el mismo tema que una 'Situación', responde usando el 'Procedimiento'. 3. Puedes parafrasear la respuesta para que suene natural, pero mantén los datos técnicos exactos. 4. Si la información no está en la base de conocimientos, di: 'Lo siento, no tengo información oficial sobre ese procedimiento específico en el manual'."""
 }
+
 
 @app.route("/")
 def index():
@@ -73,7 +76,7 @@ def index():
     # Si no, mostramos la página de bienvenida con opción de login/registro
     return render_template("index.html")
 
-# En app.py
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     # Olvidar cualquier user_id previo
@@ -119,6 +122,7 @@ def register():
 
     return render_template("register.html")
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     # Olvidar cualquier user_id previo
@@ -149,11 +153,13 @@ def login():
     # Si es GET, mostrar el formulario
     return render_template("login.html")
 
+
 @app.route("/logout")
 def logout():
     # Olvidar cualquier user_id previo
     session.clear()
     return redirect("/")
+
 
 @app.route("/dashboard")
 def dashboard():
@@ -163,6 +169,7 @@ def dashboard():
     # Consultamos el historial de mensajes de este usuario
     history = Message.query.filter_by(user_id=session["user_id"]).order_by(Message.timestamp.asc()).all()
     return render_template("dashboard.html", history=history)
+
 
 @app.route("/preguntar", methods=["POST"])
 def preguntar():
@@ -182,7 +189,7 @@ def preguntar():
         response = model.generate_content(pregunta_usuario)
         respuesta_ia = response.text
 
-        # 3. Guardar en la base de datos (SQLAlchemy)
+        # 3. Guardar en la base de datos
         nuevo_mensaje = Message(
             user_id=session["user_id"],
             pregunta=pregunta_usuario,
@@ -202,6 +209,50 @@ def preguntar():
         print(f"Error con Gemini: {e}")
         return jsonify({"answer": "Lo siento, hubo un error procesando tu consulta con la IA."}), 500
 
+
+@app.route("/settings")
+def settings():
+    if not session.get("user_id"):
+        return redirect("/login")
+    return render_template("settings.html")
+
+
+@app.route("/change_password", methods=["POST"])
+def change_password():
+    user_id = session.get("user_id")
+    current_pw = request.form.get("current_password")
+    new_pw = request.form.get("new_password")
+    confirmation = request.form.get("confirmation")
+
+    if not current_pw or not new_pw or not confirmation:
+        flash("Los campos no pueden estar vacios")
+        return redirect("/settings")
+
+    user = User.query.get(user_id)
+
+    if not check_password_hash(user.password_hash, current_pw):
+        flash("La contraseña actual es incorrecta")
+        return redirect("/settings")
+
+    if new_pw != confirmation:
+        flash("La nueva contraseña y la confirmación no coinciden")
+        return redirect("/settings")
+
+    user.password_hash = generate_password_hash(new_pw)
+    db.session.commit()
+    flash("Contraseña actualizada con éxito")
+    return redirect("/settings")
+
+
+@app.route("/clear_history", methods=["POST"])
+def clear_history():
+    user_id = session.get("user_id")
+    
+    Message.query.filter_by(user_id=user_id).delete()
+    db.session.commit()
+    
+    flash("Historial de chat eliminado correctamente")
+    return redirect("/dashboard")
     
 if __name__ == "__main__":
     app.run(debug=True)

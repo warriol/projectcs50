@@ -39,7 +39,7 @@
                                     Mi Cuenta
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="/change_password">Cambiar Contraseña</a></li>
+                                    <li><a class="dropdown-item" href="/settings">Ajustes</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-danger" href="/logout">Cerrar Sesión</a></li>
                                 </ul>
@@ -61,7 +61,7 @@
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <div id="mensajes" class="alert alert-info alert-dismissible fade show" role="alert">
                             {{ message }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
