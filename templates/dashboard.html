@@ -5,10 +5,14 @@
 {% block main %}
 <div class="container-fluid h-100 mt-2">
     <div class="row justify-content-center">
+        <div class="welcome-section text-center py-2">
+            <h1>¡Hola, {{ user.username }}! 👋</h1>
+            <p class="text-muted">¿En qué puedo ayudarte hoy con el soporte del Ministerio?</p>
+        </div>
         <div class="col-md-12 col-lg-12">
             <div class="card shadow-sm" style="height: 75vh;">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Asistente Legal-IT</h5>
+                    <h5 class="mb-0">Help Desk Assistant 🤖⚖️✍️</h5>
                     <select class="form-select form-select-sm w-auto" id="ia-selector">
                         <option value="legal">Asistente Legal (Azul)</option>
                         <option value="corrector">Corrector Ortográfico (Verde)</option>

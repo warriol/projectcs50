@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="/">
-                    <strong>Asistente Legal-IT</strong>
+                    <strong>Help Desk Assistant 🤖⚖️✍️</strong>
                 </a>
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
@@ -36,11 +36,13 @@
                             <li class="nav-item"><a class="nav-link" href="/dashboard">Chat IA</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Mi Cuenta
+                                    <i class="bi bi-person-circle me-1"></i> 
+                                    {{ user.username if user else "Mi Cuenta" }}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="/settings">Ajustes</a></li>
+                                    <li><h6 class="dropdown-header text-muted">Sesión iniciada como {{ user.username }}</h6></li>
                                     <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/settings">Ajustes</a></li>
                                     <li><a class="dropdown-item text-danger" href="/logout">Cerrar Sesión</a></li>
                                 </ul>
                             </li>

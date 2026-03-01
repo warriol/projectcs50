@@ -4,20 +4,28 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from models import db, User, Message
 import google.generativeai as genai
-from dotenv import load_dotenv
+from dotenv import load_dotenv # para producción debo comentar esta linea
 from flask import jsonify
 import csv
 
 # Cargar variables desde el archivo .env
-load_dotenv()
+load_dotenv() # para producción debo comentar esta linea
+
+# para producciòn debo descomentar las lineas siguientes
+#api_key = os.environ.get("GEMINI_API_KEY")
+#if not api_key:
+    #print("ERROR: GEMINI_API_KEY no encontrada en las variables de entorno del servidor.")
+
 
 # Configurar Gemini
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = Flask(__name__)
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 # Configuración de la base de datos
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///' + os.path.join(basedir, 'data', 'project.db')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Configuración de sesión
@@ -33,7 +41,6 @@ with app.app_context():
     db.create_all()
 
 # Cargo el csv
-basedir = os.path.abspath(os.path.dirname(__file__))
 ruta_csv = os.path.join(basedir, 'data', 'train.csv')
 
 
@@ -160,15 +167,16 @@ def logout():
     session.clear()
     return redirect("/")
 
-
 @app.route("/dashboard")
 def dashboard():
     if not session.get("user_id"):
         return redirect("/login")
-    
+
+    user = User.query.get(session["user_id"])    
+
     # Consultamos el historial de mensajes de este usuario
     history = Message.query.filter_by(user_id=session["user_id"]).order_by(Message.timestamp.asc()).all()
-    return render_template("dashboard.html", history=history)
+    return render_template("dashboard.html", history=history, user=user)
 
 
 @app.route("/preguntar", methods=["POST"])
@@ -214,7 +222,10 @@ def preguntar():
 def settings():
     if not session.get("user_id"):
         return redirect("/login")
-    return render_template("settings.html")
+    
+    user = User.query.get(session["user_id"])
+
+    return render_template("settings.html", user=user)
 
 
 @app.route("/change_password", methods=["POST"])
