@@ -1,9 +1,16 @@
 # Help Desk Assistant 🤖⚖️✍️
-#### Video Demo:  [link to Youtube video](<https://www.google.com>)
+#### Video Demo:  [English](<https://www.youtube.com/watch?v=HTyME58t7Kw>)
+#### Video Demo:  [Español](<https://www.youtube.com/watch?v=VT-pJn8wbr8>)
 #### Description:
-Proyecto Final para CS50x - Harvard University
+# [en]
+Final Project for CS50x - HarvardX
 
-Help Desk Assistant es una aplicación web diseñada para optimizar los flujos de trabajo en el Ministerio del Interior de Uruguay (o cualquier entorno institucional). Utiliza Inteligencia Artificial avanzada para proporcionar soporte en tres áreas críticas: asesoramiento legal normativo, corrección ortográfica técnica y asistencia basada en manuales de procedimientos internos.
+Help Desk Assistant is a web application designed to optimize workflows at the Ministry of the Interior of Uruguay. It uses Artificial Intelligence to provide support in three critical areas: legal and regulatory advice, technical spelling correction, and assistance based on internal procedure manuals.
+
+# [es]
+Proyecto Final para CS50x - HarvardX
+
+Help Desk Assistant es una aplicación web diseñada para optimizar los flujos de trabajo en el Ministerio del Interior de Uruguay. Utiliza Inteligencia Artificial para proporcionar soporte en tres áreas críticas: asesoramiento legal normativo, corrección ortográfica técnica y asistencia basada en manuales de procedimientos internos.
 
 # ⭐ Características Principales
 
